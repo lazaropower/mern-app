@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
+import Navigation from './components/Navigation';
+import ReminderList from './components/ReminderList';
+import createUser from './components/createReminder';
+import createReminder from './components/createUser';
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return ( <
+        Router >
+        <
+        Navigation / >
+
+        <
+        Route path = "/"
+        exact component = { ReminderList }
+        /> <
+        Route path = "/edit/:id"
+        exact component = { createReminder }
+        /> <
+        Route path = "/create"
+        exact component = { createReminder }
+        /> <
+        Route path = "/user"
+        exact component = { createUser }
+        />
+
+        Hello World!
+        <
+        /Router>
+    );
 }
 
 export default App;
