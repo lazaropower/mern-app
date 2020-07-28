@@ -4,8 +4,8 @@ import './App.css';
 
 import Navigation from './components/Navigation';
 import ReminderList from './components/ReminderList';
-import createUser from './components/createReminder';
-import createReminder from './components/createUser';
+import createUser from './components/createUser';
+import createReminder from './components/createReminder';
 
 function App() {
     return ( <
