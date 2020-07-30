@@ -6,7 +6,7 @@ export default class Navigation extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <Link className="navbar-brand" to="#">
+          <Link className="navbar-brand" to="/">
            <i className="fa fa-sticky-note-o text-warning" aria-hidden="true"></i> <b>Reminders</b>App
           </Link>
           <button
