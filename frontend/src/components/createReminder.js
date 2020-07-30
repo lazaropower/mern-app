@@ -1,27 +1,35 @@
 import React, { Component } from "react";
 import axios from "axios";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default class createReminder extends Component {
   state = {
     users: [],
-    userSelected: '',
-    title: '',
-    content: '',
-    date: new Date()
+    userSelected: "",
+    title: "",
+    content: "",
+    date: new Date(),
   };
 
   async componentDidMount() {
     const res = await axios.get("http://localhost:4000/api/users");
-    this.setState({ users: res.data.map((user) => user.username) });
-    console.log(this.state.users);
+    this.setState({
+      users: res.data.map((user) => user.username),
+      userSelected: res.data[0].username,
+    });
   }
 
-  onSubmit = (e) => {
-    console.log(this.state.title, this.state.content)
+  onSubmit = async (e) => {
     e.preventDefault();
+    const newReminder = {
+      title: this.state.title,
+      content: this.state.content,
+      date: this.state.date,
+      author: this.state.userSelected,
+    };
+    await axios.post("http://localhost:4000/api/reminders", newReminder);
+    window.location.href = "/";
   };
 
   onInputChange = (e) => {
@@ -30,9 +38,9 @@ export default class createReminder extends Component {
     });
   };
 
-  onChangeDate = date => {
-    this.setState({date: date})
-  }
+  onChangeDate = (date) => {
+    this.setState({ date: date });
+  };
 
   render() {
     return (
@@ -81,12 +89,11 @@ export default class createReminder extends Component {
               className="from-control"
               selected={this.state.date}
               onChange={this.onChangeDate}
-              />
+            />
           </div>
-          
 
           <form onSubmit={this.onSubmit}>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" className="btn btn-primary">
               Save
             </button>
           </form>
