@@ -26,7 +26,7 @@ export default class Navigation extends Component {
                 Reminders 
               </Link>
               <Link className="nav-item nav-link" to="/create">
-                Create
+                CreateReminder
               </Link>
               <Link className="nav-item nav-link" to="/user">
                 CreateUser
