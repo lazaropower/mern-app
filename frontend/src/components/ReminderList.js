@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { format } from "timeago.js";
+import { Link } from "react-router-dom";
 
 export default class ReminderList extends Component {
   state = {
@@ -11,7 +12,7 @@ export default class ReminderList extends Component {
     this.getReminders();
   }
 
-  async getReminders(){
+  async getReminders() {
     const res = await axios.get("http://localhost:4000/api/reminders");
     this.setState({ reminders: res.data });
   }
@@ -27,17 +28,21 @@ export default class ReminderList extends Component {
         {this.state.reminders.map((reminder) => (
           <div className="col-md-4 p-2" key={reminder._id}>
             <div className="card">
-              <div className="card-header">
+              <div className="card-header d-flex justify-content-between">
                 <h5>{reminder.title}</h5>
+                <Link
+                  className="btn btn-secondary"
+                  to={"/edit/" + reminder._id}
+                >
+                  Edit
+                </Link>
               </div>
               <div className="card-body">
                 <p>{reminder.content}</p>
                 <p>
-                  <b>{reminder.author}</b>
+                  — <i>{reminder.author}</i>
                 </p>
-                <p>
-                  <i>{format(reminder.date)}</i>
-                </p>
+                <p>{format(reminder.date)}</p>
               </div>
               <div className="card-footer">
                 <button
